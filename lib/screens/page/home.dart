@@ -1,4 +1,5 @@
 import 'package:bliss/constant/colors.dart';
+import 'package:bliss/widgets/bliss_navbar.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -7,7 +8,13 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Home'),
+      ),
+      body: Center(
+        child: Text('Home'),
+      ),
+      bottomNavigationBar: BlissNavigationBar(),
     );
   }
 }
