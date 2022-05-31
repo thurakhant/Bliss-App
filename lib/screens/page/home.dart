@@ -1,20 +1,70 @@
 import 'package:bliss/constant/colors.dart';
-import 'package:bliss/widgets/bliss_navbar.dart';
+
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  final List<String> days = ['Mon', 'Tue', 'Wed', 'Thus', 'Fri'];
+  Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
+      appBar: blissAppBar(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+          child: homeLayout(
+            [
+              const Text('Weekly Activity'),
+              const SizedBox(height: 20),
+              weeklyActicity(context, days),
+            ],
+          ),
+        ),
       ),
-      body: Center(
-        child: Text('Home'),
-      ),
-      bottomNavigationBar: BlissNavigationBar(),
     );
   }
+}
+
+//
+AppBar blissAppBar() {
+  return AppBar(
+    automaticallyImplyLeading: false,
+    title: const Text('Home'),
+  );
+}
+
+// Body Layout
+Column homeLayout(List<Widget> children) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: children,
+  );
+}
+
+//Weekly Activity Components
+Widget weeklyActicity(BuildContext context, List data) {
+  return Container(
+    width: MediaQuery.of(context).size.width,
+    height: 60,
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10), color: blissblue50),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: data
+          .map((day) => Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.greenAccent,
+                  ),
+                  width: 40,
+                  height: 40,
+                  child: Center(child: Text(day)),
+                ),
+              ))
+          .toList(),
+    ),
+  );
 }

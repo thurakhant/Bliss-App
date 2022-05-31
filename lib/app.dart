@@ -1,4 +1,5 @@
 import 'package:bliss/constant/colors.dart';
+import 'package:bliss/screens/main_page.dart';
 import 'package:bliss/screens/page/activity.dart';
 import 'package:bliss/screens/page/home.dart';
 import 'package:bliss/screens/login_page.dart';
@@ -22,7 +23,8 @@ class BlissApp extends StatelessWidget {
         '/': (context) => const WelcomePage(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
-        '/home': (context) => const Home(),
+        '/main': (context) => const MainPage(),
+        '/home': (context) => Home(),
         '/sechdule': (context) => const Sechdule(),
         'activity': (context) => const Activity(),
         '/profile': (context) => const Profile(),

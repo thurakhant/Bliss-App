@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                   BlissButton(
                       color: blissblue200,
                       onTap: () {
-                        Navigator.of(context).pushReplacementNamed('/home');
+                        Navigator.of(context).pushNamed('/main');
                       },
                       text: 'Login')
                 ],
