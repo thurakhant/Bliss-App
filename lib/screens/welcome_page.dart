@@ -29,7 +29,7 @@ class WelcomePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 50),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             BlissButton(
                                 color: blissblue200,

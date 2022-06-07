@@ -2,11 +2,11 @@ import 'package:bliss/constant/colors.dart';
 import 'package:bliss/screens/main_page.dart';
 import 'package:bliss/screens/page/activity.dart';
 import 'package:bliss/screens/page/home.dart';
-import 'package:bliss/screens/login_page.dart';
+import 'package:bliss/screens/setup/login_page.dart';
 import 'package:bliss/screens/page/profile.dart';
 import 'package:bliss/screens/page/sechdule.dart';
 import 'package:bliss/screens/welcome_page.dart';
-import 'package:bliss/screens/register_page.dart';
+import 'package:bliss/screens/setup/register_page.dart';
 import 'package:flutter/material.dart';
 
 class BlissApp extends StatelessWidget {
