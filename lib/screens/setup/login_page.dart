@@ -1,7 +1,9 @@
 import 'package:bliss/constant/colors.dart';
+import 'package:bliss/screens/main_page.dart';
 import 'package:bliss/screens/page/home.dart';
 import 'package:bliss/widgets/bliss_button.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,11 +13,21 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  void signIn() {
+  Future<void> signIn() async {
     // Validate Field
     final formState = formKey.currentState;
     if (formState!.validate()) {
       //Login with firebase
+      formState.save();
+      try {
+        UserCredential user = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+                email: email.toString(), password: password.toString());
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MainPage()));
+      } catch (e) {
+        print(e.toString());
+      }
     }
   }
 
@@ -85,11 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     BlissButton(
-                        color: blissblue200,
-                        onTap: () {
-                          Navigator.of(context).pushNamed('/main');
-                        },
-                        text: 'Login')
+                        color: blissblue200, onTap: signIn, text: 'Login')
                   ],
                 ),
               ),

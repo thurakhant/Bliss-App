@@ -29,6 +29,13 @@
             {
               "client_id": "1063056759396-0pqmpn7d6l7js58hl7jt8m5il4u65otb.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1063056759396-5oe1omb31tc8g7cd3m7fce8vs32aqvpp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "code.school.bliss"
+              }
             }
           ]
         }
