@@ -1,4 +1,4 @@
-import 'package:bliss/constant/colors.dart';
+import '../constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class BlissButton extends StatelessWidget {

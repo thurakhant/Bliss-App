@@ -1,11 +1,12 @@
-import 'package:bliss/constant/colors.dart';
+import '../../constant/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
   final List<String> days = ['Mon', 'Tue', 'Wed', 'Thus', 'Fri'];
-  Home({Key? key}) : super(key: key);
-
+  Home({this.user, Key? key}) : super(key: key);
+  final User? user;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +19,9 @@ class Home extends StatelessWidget {
               const Text('Weekly Activity'),
               const SizedBox(height: 20),
               weeklyActicity(context, days),
+              Center(
+                child: Text(user!.email.toString()),
+              )
             ],
           ),
         ),
@@ -26,7 +30,7 @@ class Home extends StatelessWidget {
   }
 }
 
-//
+// AppBar
 AppBar blissAppBar() {
   return AppBar(
     automaticallyImplyLeading: false,

@@ -1,7 +1,6 @@
-import 'package:bliss/constant/colors.dart';
-import 'package:bliss/screens/main_page.dart';
-import 'package:bliss/screens/page/home.dart';
-import 'package:bliss/widgets/bliss_button.dart';
+import '../../constant/colors.dart';
+import '../page/home.dart';
+import '../../widgets/bliss_button.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -13,99 +12,113 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  Future<void> signIn() async {
-    // Validate Field
-    final formState = formKey.currentState;
-    if (formState!.validate()) {
-      //Login with firebase
-      formState.save();
-      try {
-        UserCredential user = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(
-                email: email.toString(), password: password.toString());
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MainPage()));
-      } catch (e) {
-        print(e.toString());
-      }
-    }
-  }
-
-  String? email, password;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  String? email, password;
+
   bool _isObsure = true;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: blissblue200,
-        title: const Text('Login'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40),
-        child: Form(
-          key: formKey,
-          child: Column(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      "Welcome Bliss's Member",
-                      style: Theme.of(context).textTheme.headline1,
-                    ),
-                    TextFormField(
-                      validator: (input) {
-                        if (input!.isEmpty) return 'Please type an username.';
-                      },
-                      onSaved: (input) => email = input,
-                      decoration: const InputDecoration(
-                        label: Text('Username'),
-                        hintText: 'Enter Your Username',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                      ),
-                    ),
-                    TextFormField(
-                      validator: (input) {
-                        if (input!.length < 6) {
-                          return 'Please type an password.';
-                        }
-                      },
-                      onSaved: (input) => password = input,
-                      obscureText: _isObsure,
-                      decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          icon: Icon(_isObsure
-                              ? Icons.visibility
-                              : Icons.visibility_off),
-                          onPressed: () {
-                            setState(() {
-                              _isObsure = !_isObsure;
-                            });
-                          },
-                        ),
-                        label: const Text('Password'),
-                        hintText: 'Enter Your Password',
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                      ),
-                    ),
-                    BlissButton(
-                        color: blissblue200, onTap: signIn, text: 'Login')
-                  ],
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: blissblue200,
+          title: const Text('Login'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(height: 50),
+                Text(
+                  "Welcome Bliss's Member",
+                  style: Theme.of(context).textTheme.headline2,
                 ),
-              ),
-              const Expanded(flex: 1, child: SizedBox())
-            ],
+                SizedBox(height: 50),
+                Container(
+                  child: Column(
+                    children: [
+                      emailField(),
+                      SizedBox(height: 50),
+                      passwordField(),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 50),
+                BlissButton(color: blissblue200, onTap: signIn, text: 'Login'),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  TextFormField passwordField() {
+    return TextFormField(
+      validator: (input) {
+        if (input!.length < 6) {
+          return 'Please type an password.';
+        }
+      },
+      onSaved: (input) => password = input,
+      obscureText: _isObsure,
+      decoration: InputDecoration(
+        suffixIcon: IconButton(
+          icon: Icon(_isObsure ? Icons.visibility : Icons.visibility_off),
+          onPressed: () {
+            setState(() {
+              _isObsure = !_isObsure;
+            });
+          },
+        ),
+        label: const Text('Password'),
+        hintText: 'Enter Your Password',
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+      ),
+    );
+  }
+
+  TextFormField emailField() {
+    return TextFormField(
+      validator: (input) {
+        if (input!.isEmpty) return 'Please type an username.';
+        return null;
+      },
+      onSaved: (input) => email = input,
+      decoration: const InputDecoration(
+        label: Text('Username'),
+        hintText: 'Enter Your Username',
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+      ),
+    );
+  }
+
+  void signIn() async {
+    final User user;
+    final formState = formKey.currentState;
+    if (formState!.validate()) {
+      formState.save();
+      try {
+        final UserCredential userCredential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+                email: email.toString(), password: password.toString());
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Home(user: userCredential.user)));
+      } catch (e) {
+        print(e.toString());
+      }
+    }
   }
 }

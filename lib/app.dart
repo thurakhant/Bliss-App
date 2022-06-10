@@ -1,12 +1,13 @@
-import 'package:bliss/constant/colors.dart';
-import 'package:bliss/screens/main_page.dart';
-import 'package:bliss/screens/page/activity.dart';
-import 'package:bliss/screens/page/home.dart';
-import 'package:bliss/screens/setup/login_page.dart';
-import 'package:bliss/screens/page/profile.dart';
-import 'package:bliss/screens/page/sechdule.dart';
-import 'package:bliss/screens/welcome_page.dart';
-import 'package:bliss/screens/setup/register_page.dart';
+import 'constant/colors.dart';
+import 'screens/main_page.dart';
+import 'screens/page/activity.dart';
+import 'screens/page/home.dart';
+
+import 'screens/page/profile.dart';
+import 'screens/page/sechdule.dart';
+import 'screens/setup/login_page.dart';
+import 'screens/welcome_page.dart';
+import 'screens/setup/register_page.dart';
 import 'package:flutter/material.dart';
 
 class BlissApp extends StatelessWidget {
@@ -23,7 +24,7 @@ class BlissApp extends StatelessWidget {
         '/': (context) => const WelcomePage(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
-        '/main': (context) => const MainPage(),
+        // '/main': (context) => const MainPage(),
         '/home': (context) => Home(),
         '/sechdule': (context) => const Sechdule(),
         'activity': (context) => const Activity(),

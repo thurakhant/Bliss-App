@@ -1,8 +1,8 @@
-import 'package:bliss/constant/colors.dart';
-import 'package:bliss/screens/page/activity.dart';
-import 'package:bliss/screens/page/home.dart';
-import 'package:bliss/screens/page/profile.dart';
-import 'package:bliss/screens/page/sechdule.dart';
+import '../constant/colors.dart';
+import 'page/activity.dart';
+import 'page/home.dart';
+import 'page/profile.dart';
+import 'page/sechdule.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -15,7 +15,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
 
-  final screens = [Home(), Sechdule(), Activity(), Profile()];
+  final screens = [Home(), const Sechdule(), const Activity(), const Profile()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
