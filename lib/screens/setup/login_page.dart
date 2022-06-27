@@ -33,22 +33,22 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 Text(
                   "Welcome Bliss's Member",
                   style: Theme.of(context).textTheme.headline2,
                 ),
-                SizedBox(height: 50),
-                Container(
+                const SizedBox(height: 50),
+                SizedBox(
                   child: Column(
                     children: [
                       emailField(),
-                      SizedBox(height: 50),
+                      const SizedBox(height: 50),
                       passwordField(),
                     ],
                   ),
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 BlissButton(color: blissblue200, onTap: signIn, text: 'Login'),
               ],
             ),

@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 import '../constant/colors.dart';
 import 'setup/login_page.dart';
 import 'setup/register_page.dart';
@@ -34,15 +36,11 @@ class WelcomePage extends StatelessWidget {
           children: [
             BlissButton(
                 color: blissblue200,
-                onTap: () {
-                  Navigator.push(context, navigateToSigIn());
-                },
+                onTap: () => Get.toNamed('/login'),
                 text: 'Login'),
             BlissButton(
                 color: blissblue100,
-                onTap: () {
-                  Navigator.push(context, navigateToRegister());
-                },
+                onTap: () => Get.toNamed('/register'),
                 text: 'Register'),
           ],
         ),

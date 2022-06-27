@@ -1,14 +1,8 @@
-import 'constant/colors.dart';
-import 'screens/main_page.dart';
-import 'screens/page/activity.dart';
-import 'screens/page/home.dart';
+import 'package:bliss/routes/routes.dart';
 
-import 'screens/page/profile.dart';
-import 'screens/page/sechdule.dart';
-import 'screens/setup/login_page.dart';
-import 'screens/welcome_page.dart';
-import 'screens/setup/register_page.dart';
+import 'constant/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BlissApp extends StatelessWidget {
   const BlissApp({Key? key}) : super(key: key);
@@ -16,20 +10,11 @@ class BlissApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const appName = 'Bliss App';
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: appName,
       initialRoute: '/',
-      routes: {
-        '/': (context) => const WelcomePage(),
-        '/login': (context) => const LoginPage(),
-        '/register': (context) => const RegisterPage(),
-        // '/main': (context) => const MainPage(),
-        '/home': (context) => Home(),
-        '/sechdule': (context) => const Sechdule(),
-        'activity': (context) => const Activity(),
-        '/profile': (context) => const Profile(),
-      },
+      getPages: Routes.routes,
       theme: ThemeData(
           brightness: Brightness.light,
           primaryColor: blissblue200,

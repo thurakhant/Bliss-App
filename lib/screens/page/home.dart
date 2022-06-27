@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
             [
               const Text('Weekly Activity'),
               const SizedBox(height: 20),
-              weeklyActicity(context, days),
+              weeklyActivity(context, days),
               Center(
                 child: Text(user!.email.toString()),
               )
@@ -47,7 +47,7 @@ Column homeLayout(List<Widget> children) {
 }
 
 //Weekly Activity Components
-Widget weeklyActicity(BuildContext context, List data) {
+Widget weeklyActivity(BuildContext context, List data) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 60,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Sechdule extends StatelessWidget {
-  const Sechdule({Key? key}) : super(key: key);
+class SechdulePage extends StatelessWidget {
+  const SechdulePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
