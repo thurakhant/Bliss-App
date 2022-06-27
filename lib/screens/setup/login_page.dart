@@ -1,3 +1,6 @@
+import 'package:bliss/screens/main_page.dart';
+import 'package:get/get.dart';
+
 import '../../constant/colors.dart';
 import '../page/home.dart';
 import '../../widgets/bliss_button.dart';
@@ -111,11 +114,10 @@ class _LoginPageState extends State<LoginPage> {
         final UserCredential userCredential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(
                 email: email.toString(), password: password.toString());
+        var username = userCredential.user!.email;
         // ignore: use_build_context_synchronously
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Home(user: userCredential.user)));
+
+        Get.to(const MainPage(), arguments: ['$username']);
       } catch (e) {
         print(e.toString());
       }

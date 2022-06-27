@@ -25,7 +25,7 @@ class BlissApp extends StatelessWidget {
             headline2: TextStyle(
                 fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
             bodyText1: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.bold, color: blissblue50),
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
           )),
     );
   }

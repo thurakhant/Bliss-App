@@ -1,3 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
+
 import '../constant/colors.dart';
 import 'page/activity.dart';
 import 'page/home.dart';
@@ -6,7 +9,8 @@ import 'page/sechdule.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  final User? user;
+  const MainPage({this.user, Key? key}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -15,16 +19,22 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
 
-  final screens = [
-    Home(),
-    const SechdulePage(),
-    const ActivityPage(),
-    const ProfilePage()
-  ];
   @override
   Widget build(BuildContext context) {
+    var username = Get.arguments;
+    //var username = widget.user!.email.toString();
     return Scaffold(
-      body: screens[currentIndex],
+      body: currentIndex == 0
+          ? Home(
+              username: username,
+            )
+          : currentIndex == 1
+              ? const SechdulePage()
+              : currentIndex == 2
+                  ? const ActivityPage()
+                  : currentIndex == 3
+                      ? const ProfilePage()
+                      : null,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: blissblue100,
         selectedItemColor: blissblue300,
