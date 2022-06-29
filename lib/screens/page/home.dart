@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
       body: Scaffold(
         body: homeLayout(
           [
-            Text('Weekly Attendence',
+            Text('Weekly Attendance',
                 style: Theme.of(context).textTheme.bodyText1),
             const SizedBox(height: 18),
             weeklyActivity(context, days),

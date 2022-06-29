@@ -2,7 +2,6 @@ import 'package:bliss/screens/main_page.dart';
 import 'package:get/get.dart';
 
 import '../../constant/colors.dart';
-import '../page/home.dart';
 import '../../widgets/bliss_button.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,38 +21,46 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: blissblue200,
-          title: const Text('Login'),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40),
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const SizedBox(height: 50),
-                Text(
-                  "Welcome Bliss's Member",
-                  style: Theme.of(context).textTheme.headline2,
-                ),
-                const SizedBox(height: 50),
-                SizedBox(
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: blissblue200,
+        title: const Text('Login'),
+      ),
+      body: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Center(
+          child: Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: Form(
+                  key: formKey,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      emailField(),
                       const SizedBox(height: 50),
-                      passwordField(),
+                      Text(
+                        "Welcome Bliss's Member",
+                        style: Theme.of(context).textTheme.headline2,
+                      ),
+                      const SizedBox(height: 50),
+                      SizedBox(
+                        child: Column(
+                          children: [
+                            emailField(),
+                            const SizedBox(height: 50),
+                            passwordField(),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 50),
+                      BlissButton(
+                          color: blissblue200, onTap: signIn, text: 'Login'),
                     ],
                   ),
                 ),
-                const SizedBox(height: 50),
-                BlissButton(color: blissblue200, onTap: signIn, text: 'Login'),
-              ],
+              ),
             ),
           ),
         ),
@@ -117,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
         var username = userCredential.user!.email;
         // ignore: use_build_context_synchronously
 
-        Get.to(const MainPage(), arguments: ['$username']);
+        Get.off(const MainPage(), arguments: ['$username']);
       } catch (e) {
         print(e.toString());
       }
