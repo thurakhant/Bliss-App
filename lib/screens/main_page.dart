@@ -21,13 +21,11 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    var username = Get.arguments;
+    // var username = Get.arguments;
     //var username = widget.user!.email.toString();
     return Scaffold(
       body: currentIndex == 0
-          ? Home(
-              username: username,
-            )
+          ? const Home()
           : currentIndex == 1
               ? const SechdulePage()
               : currentIndex == 2

@@ -23,9 +23,7 @@ class Routes {
     ),
     GetPage(
       name: '/home',
-      page: () => const Home(
-        username: "",
-      ),
+      page: () => const Home(),
     ),
     GetPage(
       name: '/sechdule',

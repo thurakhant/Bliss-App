@@ -18,7 +18,7 @@ class RegisterPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-            child: Expanded(
+            child: Center(
               child: Column(
                 children: [
                   Text(

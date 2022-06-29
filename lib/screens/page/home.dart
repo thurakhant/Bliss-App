@@ -3,8 +3,8 @@ import '../../constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  final username;
-  const Home({required this.username, Key? key}) : super(key: key);
+  // final username;
+  const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -25,14 +25,45 @@ class _HomeState extends State<Home> {
         body: homeLayout(
           [
             Text('Weekly Attendance',
-                style: Theme.of(context).textTheme.bodyText1),
+                style: Theme.of(context).textTheme.headline2),
             const SizedBox(height: 18),
             weeklyActivity(context, days),
             const SizedBox(height: 30),
             Text('Personal Information',
-                style: Theme.of(context).textTheme.bodyText1),
+                style: Theme.of(context).textTheme.headline2),
             const SizedBox(height: 18),
             profile(context, name, major, semster),
+            const SizedBox(height: 30),
+            Text('Utility', style: Theme.of(context).textTheme.headline2),
+            const SizedBox(height: 18),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 120,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: blissblue50,
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                      flex: 1,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              bottomLeft: Radius.circular(20)),
+                          color: Colors.red,
+                        ),
+                      )),
+                  Expanded(
+                      flex: 1,
+                      child: Container(
+                        color: Colors.green,
+                      )),
+                  utilityButton(0, 20, 0, 20, icon: Icons.history_edu),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -80,10 +111,7 @@ Widget profile(BuildContext context, String name, major, semster) {
             width: 60,
             height: 60,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(40),
-                image: const DecorationImage(
-                    image: NetworkImage('https://picsum.photos/200/300'),
-                    fit: BoxFit.fill)),
+                borderRadius: BorderRadius.circular(40), color: Colors.red),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,4 +158,35 @@ Widget weeklyActivity(BuildContext context, List data) {
           .toList(),
     ),
   );
+}
+
+Widget utilityButton(
+  double topLeft,
+  double topRight,
+  double bottomLeft,
+  double bottomRight, {
+  IconData? icon,
+}) {
+  return Expanded(
+      flex: 1,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(topRight),
+              bottomRight: Radius.circular(bottomRight),
+              topLeft: Radius.circular(topLeft),
+              bottomLeft: Radius.circular(bottomLeft)),
+          color: Colors.pink,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Icon(
+              icon,
+              size: 50,
+            ),
+            const Text('Books', style: TextStyle(fontSize: 14)),
+          ],
+        ),
+      ));
 }

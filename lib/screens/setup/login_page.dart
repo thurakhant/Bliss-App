@@ -1,10 +1,9 @@
-import 'package:bliss/screens/main_page.dart';
+import 'package:bliss/screens/page/home.dart';
 import 'package:get/get.dart';
 
 import '../../constant/colors.dart';
 import '../../widgets/bliss_button.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -29,37 +28,34 @@ class _LoginPageState extends State<LoginPage> {
       ),
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: Center(
-          child: Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const SizedBox(height: 50),
-                      Text(
-                        "Welcome Bliss's Member",
-                        style: Theme.of(context).textTheme.headline2,
-                      ),
-                      const SizedBox(height: 50),
-                      SizedBox(
-                        child: Column(
-                          children: [
-                            emailField(),
-                            const SizedBox(height: 50),
-                            passwordField(),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 50),
-                      BlissButton(
-                          color: blissblue200, onTap: signIn, text: 'Login'),
-                    ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: Form(
+            key: formKey,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Welcome Bliss's Member",
+                    style: Theme.of(context).textTheme.headline2,
                   ),
-                ),
+                  const SizedBox(height: 50),
+                  SizedBox(
+                    child: Column(
+                      children: [
+                        emailField(),
+                        const SizedBox(height: 30),
+                        passwordField(),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 50),
+                  BlissButton(
+                      color: blissblue200,
+                      onTap: () => Get.off(() => const Home()),
+                      text: 'Login'),
+                ],
               ),
             ),
           ),
@@ -112,22 +108,22 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void signIn() async {
-    final User user;
-    final formState = formKey.currentState;
-    if (formState!.validate()) {
-      formState.save();
-      try {
-        final UserCredential userCredential = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(
-                email: email.toString(), password: password.toString());
-        var username = userCredential.user!.email;
-        // ignore: use_build_context_synchronously
+  // void signIn() async {
+  //   final User user;
+  //   final formState = formKey.currentState;
+  //   if (formState!.validate()) {
+  //     formState.save();
+  //     try {
+  //       final UserCredential userCredential = await FirebaseAuth.instance
+  //           .signInWithEmailAndPassword(
+  //               email: email.toString(), password: password.toString());
+  //       var username = userCredential.user!.email;
+  //       // ignore: use_build_context_synchronously
 
-        Get.off(const MainPage(), arguments: ['$username']);
-      } catch (e) {
-        print(e.toString());
-      }
-    }
-  }
+  //       Get.off(const MainPage(), arguments: ['$username']);
+  //     } catch (e) {
+  //       print(e.toString());
+  //     }
+  //   }
+  // }
 }
