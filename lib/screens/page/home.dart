@@ -36,49 +36,40 @@ class _HomeState extends State<Home> {
             const SizedBox(height: 30),
             Text('Utility', style: Theme.of(context).textTheme.headline2),
             const SizedBox(height: 18),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 120,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: blissblue50,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                      flex: 1,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20)),
-                          color: Colors.red,
-                        ),
-                      )),
-                  Expanded(
-                      flex: 1,
-                      child: Container(
-                        color: Colors.green,
-                      )),
-                  utilityButton(0, 20, 0, 20, icon: Icons.history_edu),
-                ],
-              ),
-            ),
+            utility(context),
+            const SizedBox(height: 30),
+            Text('Today Class', style: Theme.of(context).textTheme.headline2)
           ],
         ),
       ),
     );
   }
+
+// Utility
+  Container utility(BuildContext context) => Container(
+        width: MediaQuery.of(context).size.width,
+        height: 120,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: blissblue50,
+        ),
+        child: Row(
+          children: [
+            utilityButton(Icons.book, 'Books'),
+            utilityButton(Icons.qr_code, 'Scan QR'),
+            utilityButton(Icons.people, 'Request Absent'),
+            utilityButton(Icons.history_edu, 'Exam Result'),
+          ],
+        ),
+      );
 }
 
 // AppBar
-AppBar blissAppBar() {
-  return AppBar(
-    centerTitle: true,
-    automaticallyImplyLeading: false,
-    title: const Text('Home'),
-  );
-}
+AppBar blissAppBar() => AppBar(
+      centerTitle: true,
+      automaticallyImplyLeading: false,
+      title: const Text('Home'),
+    );
 
 // Body Layout
 Widget homeLayout(List<Widget> children) {
@@ -94,99 +85,93 @@ Widget homeLayout(List<Widget> children) {
 }
 
 // Profile
-Widget profile(BuildContext context, String name, major, semster) {
-  return Container(
-    width: MediaQuery.of(context).size.width,
-    height: 120,
-    decoration: BoxDecoration(
-        border: Border.all(color: blissblue300),
-        borderRadius: BorderRadius.circular(20),
-        color: blissblue50),
-    child: Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Row(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(right: 16),
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(40), color: Colors.red),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Name - $name',
-                  style: Theme.of(context).textTheme.bodyText1),
-              Text('Major - $major',
-                  style: Theme.of(context).textTheme.bodyText1),
-              Text('Semster - $semster',
-                  style: Theme.of(context).textTheme.bodyText1)
-            ],
-          )
-        ],
-      ),
-    ),
-  );
-}
-
-//Weekly Activity Components
-Widget weeklyActivity(BuildContext context, List data) {
-  return Container(
-    width: MediaQuery.of(context).size.width,
-    height: 60,
-    decoration: BoxDecoration(
-        border: Border.all(color: blissblue300),
-        borderRadius: BorderRadius.circular(10),
-        color: blissblue50),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: data
-          .map((day) => Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.greenAccent,
-                  ),
-                  width: 40,
-                  height: 40,
-                  child: Center(child: Text(day)),
-                ),
-              ))
-          .toList(),
-    ),
-  );
-}
-
-Widget utilityButton(
-  double topLeft,
-  double topRight,
-  double bottomLeft,
-  double bottomRight, {
-  IconData? icon,
-}) {
-  return Expanded(
-      flex: 1,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(topRight),
-              bottomRight: Radius.circular(bottomRight),
-              topLeft: Radius.circular(topLeft),
-              bottomLeft: Radius.circular(bottomLeft)),
-          color: Colors.pink,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+Widget profile(BuildContext context, String name, major, semster) => Container(
+      width: MediaQuery.of(context).size.width,
+      height: 120,
+      decoration: BoxDecoration(
+          border: Border.all(color: blissblue300),
+          borderRadius: BorderRadius.circular(20),
+          color: blissblue50),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
           children: [
-            Icon(
-              icon,
-              size: 50,
+            Container(
+              margin: const EdgeInsets.only(right: 16),
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40), color: Colors.red),
             ),
-            const Text('Books', style: TextStyle(fontSize: 14)),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Name - $name',
+                    style: Theme.of(context).textTheme.bodyText1),
+                Text('Major - $major',
+                    style: Theme.of(context).textTheme.bodyText1),
+                Text('Semster - $semster',
+                    style: Theme.of(context).textTheme.bodyText1)
+              ],
+            )
           ],
         ),
-      ));
-}
+      ),
+    );
+
+//Weekly Activity Components
+
+// Attendence
+Widget weeklyActivity(BuildContext context, List data) => Container(
+      width: MediaQuery.of(context).size.width,
+      height: 60,
+      decoration: BoxDecoration(
+          border: Border.all(color: blissblue300),
+          borderRadius: BorderRadius.circular(10),
+          color: blissblue50),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: data
+            .map((day) => Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.greenAccent,
+                    ),
+                    width: 40,
+                    height: 40,
+                    child: Center(child: Text(day)),
+                  ),
+                ))
+            .toList(),
+      ),
+    );
+
+// Utility Button
+Widget utilityButton(IconData? icon, String text) => Expanded(
+    flex: 1,
+    child: Material(
+      borderRadius: BorderRadius.circular(20),
+      color: blissblue50,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(20),
+        splashColor: Colors.blueGrey,
+        onTap: () {
+          print('clicked');
+        },
+        child: SizedBox(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Icon(
+                icon,
+                size: 50,
+              ),
+              Text(text, style: const TextStyle(fontSize: 14)),
+            ],
+          ),
+        ),
+      ),
+    ));
